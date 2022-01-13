@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 
 function BeneficiaryCard({ name, alias, bank, accnumber, onPress }) {
   return (

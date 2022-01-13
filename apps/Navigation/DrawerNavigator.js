@@ -4,9 +4,10 @@ import { Image } from "react-native";
 import {
   LogoutScreen,
   ProfileScreen,
-  Dashboard
+  Dashboard,
+  SettingsScreen,
 } from "../screens";
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const drawer = createDrawerNavigator();
@@ -57,7 +58,7 @@ function DrawerNavigator(props) {
       />
       <drawer.Screen
         name="Settings"
-        component={ProfileScreen}
+        component={SettingsScreen}
         options={{
           headerTitle: "Settings",
           drawerIcon: () => (

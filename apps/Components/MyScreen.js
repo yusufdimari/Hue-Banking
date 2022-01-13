@@ -1,16 +1,22 @@
 import React from "react";
-import { SafeAreaView, StyleSheet , TouchableWithoutFeedback, Keyboard} from "react-native";
-import colors from "../constants/colors";
-
+import {
+  SafeAreaView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import Colors from "../constants/Colors";
 function MyScreen({ children, style }) {
+  const colors=Colors()
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <SafeAreaView style={[styles.container, style]}>{children}</SafeAreaView>
+      <SafeAreaView
+        style={[{ flex: 1, backgroundColor: colors.background }, style]}
+      >
+        {children}
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 }
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background, },
-});
 
 export default MyScreen;

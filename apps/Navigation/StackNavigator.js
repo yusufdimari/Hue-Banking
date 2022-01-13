@@ -10,9 +10,10 @@ import {
   AmountScreen,
   LogoutScreen,
   RegisterScreen,
+  PaymentScreen
 } from "../screens";
 
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 
 const stack = createStackNavigator();
 function StackNavigator(props) {
@@ -87,6 +88,18 @@ function StackNavigator(props) {
         component={RegisterScreen}
         options={{
           headerTitle: "Register",
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "black",
+          },
+        }}
+      />
+      <stack.Screen
+        name={"pay"}
+        component={PaymentScreen}
+        options={{
+          headerTitle: "Pay",
           headerTitleStyle: {
             fontSize: 20,
             fontWeight: "bold",

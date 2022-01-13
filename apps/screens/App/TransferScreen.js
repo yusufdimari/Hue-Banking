@@ -11,13 +11,14 @@ import { MyScreen, ConfirmButton } from "../../Components";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 const validationSchema = Yup.object().shape({
   accnumber: Yup.number().required().label("Account Number"),
   bank: Yup.string().required().label("bank"),
 });
 function TransferScreen({ navigation }) {
+  const colors=Colors()
   return (
     <MyScreen>
       <KeyboardAvoidingView
@@ -62,7 +63,7 @@ function TransferScreen({ navigation }) {
                 <KeyboardAvoidingView
                   behavior={Platform.OS == "ios" ? "padding" : null}
                 >
-                  <View style={styles.modalContainer}>
+                  <View style={styles.modalContainer,{backgroundColor:colors.background}}>
                     <View style={{ marginBottom: 20 }}>
                       <Text style={styles.header}>Transfer Money</Text>
                       <View style={styles.semiContainer}>
@@ -117,7 +118,6 @@ function TransferScreen({ navigation }) {
 const styles = StyleSheet.create({
   modalContainer: {
     width: "90%",
-    backgroundColor: colors.background,
     marginVertical: 20,
     elevation: 5,
     borderRadius: 30,

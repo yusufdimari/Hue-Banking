@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, FlatList, TextInput, Modal } from "react-native";
-import {BeneficiaryCard, ConfirmButton, MyScreen} from '../../Components'
-import colors from "../../constants/colors";
+import { BeneficiaryCard, ConfirmButton, MyScreen } from "../../Components";
+import Colors from "../../constants/Colors";
 import NewBeneficiary from "./NewBeneficiary";
 
 const data = [
@@ -51,10 +51,15 @@ const data = [
 
 function Beneficiaries({ navigation }) {
   const [visible, setVisible] = useState(false);
+  const colors = Colors();
   return (
     <MyScreen>
-      <View style={styles.container}>
-        <View style={styles.searchContainer}>
+      <View style={(styles.container, { backgroundColor: colors.background })}>
+        <View
+          style={
+            (styles.searchContainer, { backgroundColor: colors.background })
+          }
+        >
           <TextInput
             style={{ color: colors.primary, marginLeft: 10 }}
             placeholder={"Search"}
@@ -116,7 +121,6 @@ const styles = StyleSheet.create({
   container: {
     maxHeight: "90%",
     width: "90%",
-    backgroundColor: colors.background,
     alignSelf: "center",
     marginVertical: 20,
     elevation: 5,
@@ -130,7 +134,6 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 10,
     elevation: 5,
-    backgroundColor: colors.secondary,
     alignSelf: "center",
     justifyContent: "center",
     borderRadius: 20,
@@ -138,7 +141,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: "90%",
-    backgroundColor: colors.background,
     // alignSelf: "center",
     marginVertical: 20,
     elevation: 5,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 import { CardComponent, MyScreen, RoundComponent } from "../../Components";
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 import firebase from "../../Firebase/firebase";
 
 let displayEmail;
@@ -15,11 +15,8 @@ function Dashboard({ navigation }) {
   const [details, setDetails] = useState([]);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      // if (user) {
       uid = user.uid;
       fire(uid);
-      console.log(uid);
-      // }
     });
   }, []);
 
@@ -44,7 +41,7 @@ function Dashboard({ navigation }) {
         setHistory(trans);
       });
   };
-
+  const colors = Colors();
   return (
     <MyScreen style={styles.container}>
       <View style={styles.cardContainer}>
@@ -62,10 +59,10 @@ function Dashboard({ navigation }) {
       </View>
       <View style={styles.roundedContainer}>
         <RoundComponent
-          description={"Bank Transfer"}
-          icon={"bank-transfer"}
+          description={"Fund Account"}
+          icon={"credit-card"}
           onPress={() => {
-            navigation.navigate("transfer");
+            navigation.navigate("amount");
           }}
         />
         <RoundComponent
@@ -80,8 +77,10 @@ function Dashboard({ navigation }) {
           }}
         />
       </View>
-      <View style={styles.history}>
-        <Text style={styles.historyTitle}>Transfer History</Text>
+      <View style={[styles.history, { backgroundColor: colors.primary }]}>
+        <Text style={[styles.historyTitle, { color: colors.secondary }]}>
+          Transfer History
+        </Text>
         <FlatList
           data={history}
           keyExtractor={(data) => {
@@ -117,12 +116,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "90%",
     marginBottom: 10,
-    backgroundColor: colors.primary,
     borderRadius: 20,
     padding: 10,
   },
   historyTitle: {
-    color: colors.secondary,
     textTransform: "uppercase",
     fontWeight: "bold",
   },

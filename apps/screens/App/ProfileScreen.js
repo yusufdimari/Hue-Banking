@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { MyScreen } from "../../Components";
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 function ProfileScreen(props) {
+  const colors = Colors();
   return (
     <MyScreen>
       <Image
@@ -17,22 +18,32 @@ function ProfileScreen(props) {
         resizeMode="contain"
       />
       <View style={styles.bottomContainer}>
-        <View style={styles.container}>
+        <View
+          style={(styles.container, { backgroundColor: colors.background })}
+        >
           <View style={styles.textContainer}>
             <Text style={styles.title}>Name: </Text>
-            <Text style={styles.subTitle}>Yusuf Muhammad Dimari</Text>
+            <Text style={(styles.subTitle, { color: colors.secondary })}>
+              Yusuf Muhammad Dimari
+            </Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.title}>Account: </Text>
-            <Text style={styles.subTitle}>0236028591</Text>
+            <Text style={(styles.subTitle, { color: colors.secondary })}>
+              0236028591
+            </Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.title}>Bank: </Text>
-            <Text style={styles.subTitle}>Wema Bank</Text>
+            <Text style={(styles.subTitle, { color: colors.secondary })}>
+              Wema Bank
+            </Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.title}>BVN: </Text>
-            <Text style={styles.subTitle}>Yusuf Muhammad Dimari</Text>
+            <Text style={(styles.subTitle, { color: colors.secondary })}>
+              Yusuf Muhammad Dimari
+            </Text>
           </View>
         </View>
       </View>
@@ -47,7 +58,6 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "90%",
-    backgroundColor: colors.background,
     marginVertical: 20,
     elevation: 5,
     borderRadius: 30,
@@ -68,7 +78,6 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 15,
-    color: colors.secondary,
     fontWeight: "bold",
     alignSelf: "flex-end",
   },

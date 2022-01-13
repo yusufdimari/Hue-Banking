@@ -1,10 +1,11 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import colors from "../constants/colors";
+import Colors from "../constants/Colors";
 
 function ConfirmButton({ title, onPress }) {
+  const colors=Colors()
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, {backgroundColor:colors.background}]} onPress={onPress}>
       <Text style={{ fontWeight: "bold", fontSize: 20, paddingHorizontal: 20 }}>
         {title}
       </Text>
@@ -13,7 +14,6 @@ function ConfirmButton({ title, onPress }) {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.background,
     elevation: 5,
     height: 50,
     borderRadius: 10,

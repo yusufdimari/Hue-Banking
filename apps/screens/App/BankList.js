@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 const banks = "https://api.paystack.co/bank";
 function BankList({ setModalVisible, onSelectItem }) {
@@ -29,12 +29,14 @@ function BankList({ setModalVisible, onSelectItem }) {
     }
     setArray(filteredData);
   }
-
+  const colors = Colors();
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
+    <View style={(styles.container, { backgroundColor: colors.background })}>
+      <View
+        style={(styles.searchContainer, { backgroundColor: colors.background })}
+      >
         <TextInput
-          style={styles.textInput}
+          style={(styles.textInput, { color: colors.white })}
           onChangeText={(text) => {
             searchTable(data, text);
           }}
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
   container: {
     maxHeight: "80%",
     width: "90%",
-    backgroundColor: colors.background,
     alignSelf: "center",
     marginVertical: 20,
     borderRadius: 30,
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
   },
   bank: {
     width: "90%",
-    backgroundColor: colors.background,
     alignSelf: "center",
     marginBottom: 20,
     elevation: 5,
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 15,
     elevation: 5,
-    backgroundColor: colors.secondary,
     alignSelf: "center",
     borderRadius: 20,
     marginBottom: 20,
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    color: colors.white,
     textAlign: "center",
   },
 });

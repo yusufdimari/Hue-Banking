@@ -11,14 +11,16 @@ import {
 } from "react-native";
 import { ConfirmButton, MyScreen } from "../../Components";
 
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 const validationSchema = Yup.object().shape({
   amount: Yup.number().required().label("Amount"),
   description: Yup.string(),
   pin: Yup.number().required(),
+  email: Yup.string().email().required(),
 });
 function AmountScreen({ navigation, route }) {
+  const colors = Colors();
   return (
     <MyScreen>
       <KeyboardAvoidingView
@@ -36,10 +38,15 @@ function AmountScreen({ navigation, route }) {
               amount: "",
               description: "",
               pin: "",
+              email: "",
             }}
             onSubmit={(values) => {
               values.pin == "2580"
-                ? navigation.replace("dashboard")
+                ? navigation.navigate("pay", {
+                    amount: values.amount,
+                    description: values.description,
+                    email: values.email,
+                  })
                 : alert("incorrect Pin");
             }}
             validationSchema={validationSchema}
@@ -55,8 +62,13 @@ function AmountScreen({ navigation, route }) {
                 <KeyboardAvoidingView
                   behavior={Platform.OS == "ios" ? "padding" : null}
                 >
-                  <View style={styles.modalContainer}>
-                    <View style={styles.semiContainer}>
+                  <View
+                    style={
+                      (styles.modalContainer,
+                      { backgroundColor: colors.background })
+                    }
+                  >
+                    {/* <View style={styles.semiContainer}>
                       <Text style={styles.title}>Account Number:</Text>
                       <TextInput
                         style={styles.inputField}
@@ -76,14 +88,15 @@ function AmountScreen({ navigation, route }) {
                     </View>
                     <Text style={styles.errorMessage}>
                       {touched.bank && errors.bank}
-                    </Text>
+                    </Text> */}
 
                     <View style={styles.semiContainer}>
-                      <Text style={styles.title}>Account Name:</Text>
+                      <Text style={styles.title}>Email:</Text>
                       <TextInput
                         style={styles.inputField}
-                        value={route.params.name}
-                        editable={false}
+                        onChangeText={handleChange("email")}
+                        keyboardType="email-address"
+                        onBlur={() => setFieldTouched("email")}
                       ></TextInput>
                     </View>
                     <Text style={styles.errorMessage}>
@@ -145,7 +158,6 @@ function AmountScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   modalContainer: {
     width: "90%",
-    backgroundColor: colors.background,
     marginVertical: 20,
     elevation: 5,
     borderRadius: 30,

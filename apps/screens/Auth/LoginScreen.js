@@ -16,13 +16,14 @@ import {
   TextInput,
 } from "react-native";
 import { ConfirmButton, MyScreen } from "../../Components";
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().max(256).lowercase().email(),
   password: Yup.string().required().max(24).min(8).label("password"),
 });
 
 function LoginScreen({ navigation }) {
+  const colors = Colors();
   return (
     <MyScreen style={styles.container}>
       <KeyboardAvoidingView
@@ -31,7 +32,7 @@ function LoginScreen({ navigation }) {
       >
         <View style={styles.logoContainer}>
           <Image
-            source={require("../../assets/logo.png")}
+            source={require("../../assets/logo-grey.png")}
             style={{ width: 200, height: 200 }}
           />
           <Text style={styles.title}>Hue Banking</Text>
@@ -50,7 +51,7 @@ function LoginScreen({ navigation }) {
                 })
                 .catch((error) => {
                   alert(error);
-                  console.log(error)
+                  console.log(error);
                 });
             }}
             validationSchema={validationSchema}
@@ -65,7 +66,12 @@ function LoginScreen({ navigation }) {
               <>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Text>Username: </Text>
-                  <View style={styles.inputContainer}>
+                  <View
+                    style={[
+                      styles.inputContainer,
+                      { backgroundColor: colors.primary },
+                    ]}
+                  >
                     <MaterialCommunityIcons
                       name={"account"}
                       size={20}
@@ -89,7 +95,12 @@ function LoginScreen({ navigation }) {
                   }}
                 >
                   <Text>Password: </Text>
-                  <View style={styles.inputContainer}>
+                  <View
+                    style={[
+                      styles.inputContainer,
+                      { backgroundColor: colors.primary },
+                    ]}
+                  >
                     <MaterialCommunityIcons
                       name={"key"}
                       size={20}
@@ -159,7 +170,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    backgroundColor: colors.primary,
     alignSelf: "center",
     borderRadius: 20,
     padding: 10,

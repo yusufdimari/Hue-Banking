@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import { ConfirmButton, MyScreen } from "../../Components";
 
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 function AddBeneficiaryScreen({ navigation }) {
+  const colors = Colors();
   return (
     <MyScreen style={{ justifyContent: "center", alignItems: "center" }}>
-      <View style={styles.container}>
+      <View style={(styles.container, { backgroundColor: colors.background })}>
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.header}>Add New Beneficiary</Text>
           <View style={styles.semiContainer}>
@@ -44,7 +45,6 @@ function AddBeneficiaryScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    backgroundColor: colors.background,
     alignSelf: "center",
     marginVertical: 20,
     elevation: 5,

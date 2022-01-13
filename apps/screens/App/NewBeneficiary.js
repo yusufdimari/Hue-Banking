@@ -12,7 +12,7 @@ import {
 import { Formik } from "formik";
 import { ConfirmButton } from "../../Components";
 import BankList from "./BankList";
-import colors from "../../constants/colors";
+import Colors from "../../constants/Colors";
 
 const validationSchema = Yup.object().shape({
   accnumber: Yup.number().required().label("Account Number"),
@@ -24,6 +24,7 @@ const validationSchema = Yup.object().shape({
 function NewBeneficiary({ onSubmit, onCancel }) {
   const [bankListVisible, setBankListVisible] = useState(false);
   const [bank, setBank] = useState("Please Select");
+  const colors = Colors();
   return (
     <View
       style={{
@@ -49,7 +50,12 @@ function NewBeneficiary({ onSubmit, onCancel }) {
             <KeyboardAvoidingView
               behavior={Platform.OS == "ios" ? "padding" : null}
             >
-              <View style={styles.modalContainer}>
+              <View
+                style={
+                  (styles.modalContainer,
+                  { backgroundColor: colors.background })
+                }
+              >
                 <View style={{ marginBottom: 20 }}>
                   <Text style={styles.header}>Add New Beneficiary</Text>
                   <View style={styles.semiContainer}>
@@ -72,7 +78,10 @@ function NewBeneficiary({ onSubmit, onCancel }) {
                       onPress={() => {
                         setBankListVisible(true);
                       }}
-                      style={styles.BankField}
+                      style={
+                        (styles.BankField,
+                        { backgroundColor: colors.background })
+                      }
                     >
                       <Text>{bank.name}</Text>
                     </TouchableOpacity>
@@ -166,7 +175,6 @@ const styles = StyleSheet.create({
   },
   BankField: {
     width: "70%",
-    backgroundColor: colors.background,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
@@ -180,7 +188,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: "90%",
-    backgroundColor: colors.background,
     // alignSelf: "center",
     marginVertical: 20,
     elevation: 5,
