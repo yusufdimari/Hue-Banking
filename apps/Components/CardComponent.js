@@ -3,7 +3,6 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  SafeAreaView,
   Text,
   Image,
   TouchableWithoutFeedback,
@@ -23,7 +22,7 @@ function CardComponent({
     <View style={[styles.Container, { backgroundColor: colors.primary }]}>
       <View style={[style, { flexDirection: "row", alignItems: "center" }]}>
         <Image
-          source={require("../assets/logo.png")}
+          source={colors.img}
           style={{ height: 50, width: 50, marginRight: 10 }}
         />
         <Text style={[styles.AccName, { color: colors.secondary }]}>
@@ -37,7 +36,9 @@ function CardComponent({
         <Text style={[styles.subtitle, { color: colors.secondary }]}>
           {accnumber}
         </Text>
-        <Text style={styles.title}>Avail Balance</Text>
+        <Text style={[styles.title, { color: colors.secondary }]}>
+          Avail Balance
+        </Text>
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={[styles.subtitle, { color: colors.secondary }]}>

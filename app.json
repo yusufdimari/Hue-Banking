@@ -4,7 +4,7 @@
     "slug": "Hue_Banking",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./apps/assets/icon.png",
+    "icon": "./apps/assets/app-logo.png",
     "splash": {
       "image": "./apps/assets/splash.png",
       "resizeMode": "cover",

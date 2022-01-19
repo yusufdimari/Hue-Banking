@@ -3,6 +3,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./apps/Navigation/StackNavigator";
 import PaymentScreen from "./apps/screens/App/PaymentScreen";
+import { SettingsScreen } from "./apps/screens";
 // import { SettingsScreen } from "./apps/screens";
 
 export default function App() {
@@ -11,5 +12,6 @@ export default function App() {
       <StackNavigator />
     </NavigationContainer>
     // <PaymentScreen />
+    // <SettingsScreen />
   );
 }

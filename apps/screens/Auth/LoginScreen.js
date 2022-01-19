@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
 // import { auth } from "../../Firebase/firebase";
 import firebase from "../../Firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Image,
@@ -14,9 +13,14 @@ import {
   Platform,
   TouchableOpacity,
   TextInput,
+  Keyboard,
+  Modal,
+  Button,
 } from "react-native";
 import { ConfirmButton, MyScreen } from "../../Components";
 import Colors from "../../constants/Colors";
+import ActivityIndicator from "../../Components/ActivityIndicator";
+import WebView from "react-native-webview";
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().max(256).lowercase().email(),
   password: Yup.string().required().max(24).min(8).label("password"),
@@ -24,6 +28,8 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const colors = Colors();
+  const [isLoading, setIsLoading] = useState(false);
+  const [browserVisible, setBrowserVisible] = useState(false);
   return (
     <MyScreen style={styles.container}>
       <KeyboardAvoidingView
@@ -31,26 +37,31 @@ function LoginScreen({ navigation }) {
         style={{ flex: 1 }}
       >
         <View style={styles.logoContainer}>
-          <Image
-            source={require("../../assets/logo-grey.png")}
-            style={{ width: 200, height: 200 }}
-          />
-          <Text style={styles.title}>Hue Banking</Text>
+          <Image source={colors.img} style={{ width: 200, height: 200 }} />
+          <Text style={[styles.title, { color: colors.text }]}>
+            Hue Banking
+          </Text>
         </View>
 
         <View style={styles.bottomContainer}>
-          <Text style={styles.loginText}>Please Login</Text>
+          <Text style={[styles.loginText, { color: colors.text }]}>
+            Please Login
+          </Text>
           <Formik
             initialValues={{ username: "", password: "" }}
             onSubmit={(values) => {
+              setIsLoading(true);
+              Keyboard.dismiss();
               firebase
                 .auth()
                 .signInWithEmailAndPassword(values.username, values.password)
                 .then(() => {
+                  setIsLoading(false);
                   navigation.replace("dashboard");
                 })
                 .catch((error) => {
                   alert(error);
+                  setIsLoading(false);
                   console.log(error);
                 });
             }}
@@ -65,7 +76,7 @@ function LoginScreen({ navigation }) {
             }) => (
               <>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text>Username: </Text>
+                  <Text style={{ color: colors.text }}>Username: </Text>
                   <View
                     style={[
                       styles.inputContainer,
@@ -76,9 +87,10 @@ function LoginScreen({ navigation }) {
                       name={"account"}
                       size={20}
                       style={{ marginRight: 10 }}
+                      color={colors.text}
                     />
                     <TextInput
-                      style={{ flex: 1 }}
+                      style={{ flex: 1, color: colors.text }}
                       onChangeText={handleChange("username")}
                       keyboardType="email-address"
                       textContentType="emailAddress"
@@ -94,7 +106,7 @@ function LoginScreen({ navigation }) {
                     alignItems: "center",
                   }}
                 >
-                  <Text>Password: </Text>
+                  <Text style={{ color: colors.text }}>Password: </Text>
                   <View
                     style={[
                       styles.inputContainer,
@@ -105,11 +117,11 @@ function LoginScreen({ navigation }) {
                       name={"key"}
                       size={20}
                       style={{ marginRight: 10 }}
-                      color={colors.secondary}
+                      color={colors.text}
                     />
                     <TextInput
                       secureTextEntry
-                      style={{ flex: 1 }}
+                      style={{ flex: 1, color: colors.text }}
                       onChangeText={handleChange("password")}
                       onBlur={() => {
                         setFieldTouched("password");
@@ -126,18 +138,44 @@ function LoginScreen({ navigation }) {
                 <View style={styles.footer}>
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate("register");
+                      setBrowserVisible(true);
                     }}
                   >
-                    <Text>Register</Text>
+                    <Text style={{ color: colors.text }}>
+                      Color Blindness Test
+                    </Text>
                   </TouchableOpacity>
-                  <Text>Forgot Password?</Text>
+                  <Text style={{ color: colors.text }}>Forgot Password?</Text>
                 </View>
               </>
             )}
           </Formik>
         </View>
       </KeyboardAvoidingView>
+      <Modal visible={isLoading} transparent>
+        <ActivityIndicator visible={true} />
+      </Modal>
+      <Modal visible={browserVisible}>
+        <MyScreen>
+          <View style={{ flex: 1 }}>
+            <View>
+              <Button
+                onPress={() => {
+                  setBrowserVisible(false);
+                }}
+                title="Done"
+                color={colors.secondary}
+              />
+            </View>
+            <WebView
+              source={{
+                uri: "https://enchroma.com/pages/color-blindness-test?format2=number",
+              }}
+              style={{ flex: 1 }}
+            />
+          </View>
+        </MyScreen>
+      </Modal>
     </MyScreen>
   );
 }

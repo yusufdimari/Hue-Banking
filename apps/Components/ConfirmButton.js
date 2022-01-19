@@ -3,10 +3,20 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 
 function ConfirmButton({ title, onPress }) {
-  const colors=Colors()
+  const colors = Colors();
   return (
-    <TouchableOpacity style={[styles.container, {backgroundColor:colors.background}]} onPress={onPress}>
-      <Text style={{ fontWeight: "bold", fontSize: 20, paddingHorizontal: 20 }}>
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor: colors.background }]}
+      onPress={onPress}
+    >
+      <Text
+        style={{
+          fontWeight: "bold",
+          fontSize: 20,
+          paddingHorizontal: 20,
+          color: colors.text,
+        }}
+      >
         {title}
       </Text>
     </TouchableOpacity>

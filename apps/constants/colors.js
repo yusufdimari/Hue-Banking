@@ -9,29 +9,39 @@ const gray = {
   white: "white",
   black: "black",
   danger: "red",
+  img: require("../assets/logo-grey.png"),
+  text: "black",
+  normal: "#a7dbd3",
 };
 const normal = {
   primary: "#EDF9F6",
   secondary: "#0C3D33",
-  background: "#a7dbd3",
+  background: " ",
   white: "white",
   black: "black",
   danger: "red",
+  img: require("../assets/logo.png"),
+  gray: "#c2c2c2",
+  text: "black",
+  normal: "#a7dbd3",
 };
 const red = {
-  primary: "red",
-  secondary: "red",
-  background: "red",
+  primary: "#3d0602",
+  secondary: "white",
+  background: "#5c0600",
   white: "white",
   black: "black",
   danger: "red",
+  gray: "#c2c2c2",
+  text: "white",
+  img: require("../assets/logo.png"),
+  normal: "#a7dbd3",
 };
 
 function Colors(props) {
   const getTheme = () => {
     try {
       AsyncStorage.getItem("theme").then((value) => {
-        console.log(value, "value");
         if (value == "Gray") {
           setMyColors(gray);
         } else if (value == "Normal") {
@@ -47,6 +57,7 @@ function Colors(props) {
   useEffect(() => {
     getTheme();
   }, []);
+  setInterval(getTheme, 1000);
   const [myColors, setMyColors] = useState(normal);
   return myColors;
 }

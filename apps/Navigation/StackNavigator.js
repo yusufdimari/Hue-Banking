@@ -10,13 +10,15 @@ import {
   AmountScreen,
   LogoutScreen,
   RegisterScreen,
-  PaymentScreen
+  PaymentScreen,
 } from "../screens";
+import Browser from "../Components/Browser";
 
-import colors from "../constants/Colors";
+import Colors from "../constants/Colors";
 
 const stack = createStackNavigator();
 function StackNavigator(props) {
+  const colors = Colors();
   return (
     <stack.Navigator
       screenOptions={{
@@ -24,7 +26,7 @@ function StackNavigator(props) {
         headerStyle: { backgroundColor: colors.background },
         headerRight: () => (
           <Image
-            source={require("../assets/logo.png")}
+            source={colors.img}
             style={{ width: 50, height: 50, marginRight: 20 }}
           />
         ),
@@ -100,6 +102,18 @@ function StackNavigator(props) {
         component={PaymentScreen}
         options={{
           headerTitle: "Pay",
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "black",
+          },
+        }}
+      />
+      <stack.Screen
+        name={"browser"}
+        component={Browser}
+        options={{
+          headerTitle: "Take Test",
           headerTitleStyle: {
             fontSize: 20,
             fontWeight: "bold",

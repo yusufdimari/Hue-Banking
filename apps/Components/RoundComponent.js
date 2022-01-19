@@ -4,17 +4,21 @@ import Colors from "../constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function RoundComponent({ description, icon, onPress }) {
-  const colors=Colors()
+  const colors = Colors();
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={[styles.rounderContainer,{backgroundColor:colors.primary}]}>
+      <View
+        style={[styles.rounderContainer, { backgroundColor: colors.primary }]}
+      >
         <MaterialCommunityIcons
           name={icon}
           size={35}
           color={colors.secondary}
         />
       </View>
-      <Text style={[styles.description, {color:colors.secondary}]}>{description}</Text>
+      <Text style={[styles.description, { color: colors.secondary }]}>
+        {description}
+      </Text>
     </TouchableOpacity>
   );
 }

@@ -7,11 +7,12 @@ import {
   Dashboard,
   SettingsScreen,
 } from "../screens";
-import colors from "../constants/Colors";
+import Colors from "../constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const drawer = createDrawerNavigator();
 function DrawerNavigator(props) {
+  const colors = Colors();
   return (
     <drawer.Navigator
       screenOptions={{
@@ -20,7 +21,7 @@ function DrawerNavigator(props) {
         drawerStyle: { backgroundColor: colors.background, width: "60%" },
         headerRight: () => (
           <Image
-            source={require("../assets/logo.png")}
+            source={colors.img}
             style={{ width: 50, height: 50, marginRight: 20 }}
           />
         ),
